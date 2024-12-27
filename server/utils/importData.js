@@ -21,35 +21,4 @@ const importJobs = async () => {
   }
 };
 
-// const chunkSize = 1000
-
-// const importJobs = async () => {
-//     try {
-//       const data = JSON.parse(fs.readFileSync('../assets/Mployee.me Task Data.json', 'utf-8'));
-//       const transformedJobs = data.map((job) => {
-//         const transformedJob = {
-//           ...job,
-//           postedDateTime: new Date(job.postedDateTime.$date),
-//         };
-
-//         if (job.jobId && typeof job.jobId === 'object' && job.jobId.$numberLong) {
-//           transformedJob.jobId = Number(job.jobId.$numberLong);
-//         }
-
-//         if (job.companyImageUrl && typeof job.companyImageUrl === 'object') {
-//           transformedJob.companyImageUrl = String(job.companyImageUrl['$numberDouble'] || '');
-//         }
-//         return transformedJob;
-//       });
-//       for (let i = 0; i < transformedJobs.length; i += chunkSize) {
-//         const chunk = transformedJobs.slice(i, i + chunkSize);
-//         await Jobs.insertMany(chunk, { ordered: false, timeout: 30000 });
-//         console.log(`Inserted chunk ${i / chunkSize + 1}`);
-//       }
-//       process.exit();
-//     } catch (error) {
-//       console.error('Error importing jobs:', error.message);
-//       process.exit(1);n
-//     }
-//   };
 importJobs();

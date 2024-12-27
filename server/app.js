@@ -41,9 +41,11 @@ app.get('/jobs', async (req, res) => {
 });
 
 app.get('/jobs/search', async (req, res) => {
-  const { location } = req.query;
-  try {
-    const jobs = await Jobs.find({ location: new RegExp(location, 'i') });
+  const { location, page=1 } = req.query;
+  const limit = 10;
+  const skip = (page-1)*limit;
+  try { 
+    const jobs = await Jobs.find({ location: new RegExp(location, 'i') }).skip(skip).limit(10);
     res.json(jobs);
   } catch (error) {
     res.status(500).json({ message: error.message });

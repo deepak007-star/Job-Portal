@@ -18,5 +18,7 @@ const jobSchema = new mongoose.Schema({
   maxExp: Number,
 });
 
+
+jobSchema.index({location:1})
 const Jobs = mongoose.model("Jobs", jobSchema);
 module.exports = Jobs;

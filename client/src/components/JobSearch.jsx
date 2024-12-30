@@ -2,7 +2,7 @@ import React from 'react';
 
 const JobSearch = ({ searchLocation, setSearchLocation }) => {
   return (
-    <div className="mb-6 group w-1/3 transition-all duration-300 focus-within:w-3/4 ">
+    <div className="mb-6 w-1/4 transition-all duration-300 focus-within:w-3/4">
       <input
         type="text"
         value={searchLocation}

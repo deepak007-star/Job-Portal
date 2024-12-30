@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 
-const JobList = ({ jobs, handleJobClick }) => {
+const JobList = ({ searchLocation, handleJobClick, currentPage, setTotalPages }) => {
+      const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const query = searchLocation ? "/search" : "";
+      const params = searchLocation
+        ? { location:searchLocation,page:currentPage }
+        : { page:currentPage };
+      try {
+        const response = await axios.get(`http://localhost:5000/jobs${query}`, {
+          params,
+        });        
+        setJobs(response.data.jobs?response.data.jobs:response.data || []);
+        setTotalPages(
+          response.data.pagination ? response.data.pagination.totalPages : ""
+        );
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+    fetchJobs();
+  }, [searchLocation, currentPage]);
+
   return (
     <div className="w-full">
       {jobs.length === 0 ? (
